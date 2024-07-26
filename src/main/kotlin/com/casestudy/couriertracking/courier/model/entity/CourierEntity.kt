@@ -1,4 +1,4 @@
-package com.casestudy.couriertracking.model
+package com.casestudy.couriertracking.courier.model.entity
 
 import jakarta.persistence.*
 import lombok.Getter
@@ -17,10 +17,16 @@ import java.util.UUID
 data class CourierEntity (
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        val id: UUID = UUID.randomUUID(),
+        @GeneratedValue(strategy = GenerationType.UUID)
+        @Column(name = "id", updatable = false, nullable = false)
+        val id: String = UUID.randomUUID().toString(),
+
+        val courierId: String,
+
         val lat: Double,
+
         val lng: Double,
+
         val timestamp: LocalDateTime
 
 )

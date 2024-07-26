@@ -18,6 +18,6 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
