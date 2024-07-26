@@ -1,0 +1,23 @@
+server:
+  port: 1231
+
+# MYSQL
+spring:
+  application:
+    name: couriertracking
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    name: mysql
+    url: jdbc:mysql://${COURIRER_TRACKING_DB_IP:localhost}:${COURIRER_TRACKING_DB_PORT:3306}/couriertrackingdatabase
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:password}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
