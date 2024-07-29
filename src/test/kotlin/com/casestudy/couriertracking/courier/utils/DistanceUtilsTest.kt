@@ -13,7 +13,12 @@ import kotlin.math.pow
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
-
+/**
+ * Unit tests for the `DistanceUtils` class.
+ *
+ * This test class verifies that the `DistanceUtils` correctly calculates distances and checks if a courier
+ * is within a specified radius from a store, and validates timestamps.
+ */
 class DistanceUtilsTest : AbstractBaseServiceTest() {
 
     @InjectMocks
@@ -22,6 +27,12 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
     @Mock
     private lateinit var mockDistanceCalculationUtil: DistanceCalculationUtil
 
+    /**
+     * Tests the `isWithinRadius` method in `DistanceUtils`.
+     *
+     * Given the coordinates of a courier and a store, this test verifies that the method returns `true`
+     * when the courier is within the specified radius in meters.
+     */
     @Test
     fun `test isWithinRadius returns true when within radius in meters`() {
         val courierLat = 37.7749
@@ -40,6 +51,12 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
         assertTrue(result, "Courier should be within the radius of the store.")
     }
 
+    /**
+     * Tests the `isWithinRadius` method in `DistanceUtils`.
+     *
+     * Given the coordinates of a courier and a store, this test verifies that the method returns `false`
+     * when the courier is outside the specified radius in meters.
+     */
     @Test
     fun `test isWithinRadius returns false when outside radius in meters`() {
         val courierLat = 37.7749
@@ -64,6 +81,12 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
         assertFalse(result, "Courier should not be within the radius of the store.")
     }
 
+    /**
+     * Tests the `calculateDistance` method in `DistanceUtils`.
+     *
+     * Given the coordinates of two points, this test verifies that the method returns the correct distance
+     * in kilometers.
+     */
     @Test
     fun `test calculateDistance returns correct distance in kilometers`() {
         val lat1 = 37.7749
@@ -90,6 +113,11 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
                 "Calculated distance ($distance) should be within the expected range ($expectedDistanceInKm ± $tolerance).")
     }
 
+    /**
+     * Tests the `isMoreThanOneMinuteAgo` method in `DistanceUtils`.
+     *
+     * Given a timestamp, this test verifies that the method returns `true` if the timestamp is more than one minute ago.
+     */
     @Test
     fun `test isMoreThanOneMinuteAgo returns true when more than one minute ago`() {
         val lastTimestamp = LocalDateTime.now().minusMinutes(2)
@@ -100,6 +128,11 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
         assertTrue(result, "Timestamp should be more than one minute ago.")
     }
 
+    /**
+     * Tests the `isMoreThanOneMinuteAgo` method in `DistanceUtils`.
+     *
+     * Given a timestamp, this test verifies that the method returns `false` if the timestamp is within one minute.
+     */
     @Test
     fun `test isMoreThanOneMinuteAgo returns false when within one minute`() {
         val lastTimestamp = LocalDateTime.now().minusSeconds(30)
@@ -110,6 +143,15 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
         assertFalse(result, "Timestamp should not be more than one minute ago.")
     }
 
+    /**
+     * Calculates the distance between two points on the Earth's surface using the Haversine formula.
+     *
+     * @param lat1 Latitude of the first point.
+     * @param lng1 Longitude of the first point.
+     * @param lat2 Latitude of the second point.
+     * @param lng2 Longitude of the second point.
+     * @return The distance between the two points in kilometers.
+     */
     fun haversine(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Double {
         val R = 6371.0 // Earth radius in kilometers
         val dLat = Math.toRadians(lat2 - lat1)

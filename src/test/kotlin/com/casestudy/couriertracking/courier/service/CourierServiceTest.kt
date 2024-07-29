@@ -24,6 +24,12 @@ import org.mockito.kotlin.whenever
 import java.time.LocalDateTime
 import java.util.*
 
+/**
+ * JUnit test class for CourierService.
+ *
+ * This class contains unit tests for the CourierService class,
+ * ensuring the correct behavior of its methods.
+ */
 class CourierServiceTest : AbstractBaseServiceTest() {
 
     @InjectMocks
@@ -37,7 +43,12 @@ class CourierServiceTest : AbstractBaseServiceTest() {
 
     private val courierEntityToCourierMapper: CourierEntityToCourierMapper = CourierEntityToCourierMapper.initialize()
 
-
+    /**
+     * Test for logCourierLocation method.
+     *
+     * This test ensures that the logCourierLocation method saves the courier's location
+     * if it is within the radius of the store and the timestamp is valid.
+     */
     @Test
     fun `logCourierLocation should save courier location if within radius and timestamp valid`() {
 
@@ -77,6 +88,12 @@ class CourierServiceTest : AbstractBaseServiceTest() {
 
     }
 
+    /**
+     * Test for logCourierLocation method.
+     *
+     * This test ensures that the logCourierLocation method throws a TimestampBeforeStoreCreateException
+     * if the timestamp is before the store's creation time.
+     */
     @Test
     fun `logCourierLocation should throw TimestampBeforeStoreCreateException if timestamp is before store creation`() {
 
@@ -99,6 +116,12 @@ class CourierServiceTest : AbstractBaseServiceTest() {
 
     }
 
+    /**
+     * Test for logCourierLocation method.
+     *
+     * This test ensures that the logCourierLocation method throws a StoreFarAwayException
+     * if the courier is far away from all stores.
+     */
     @Test
     fun `logCourierLocation should throw StoreFarAwayException if courier is far away from all stores`() {
 
@@ -121,6 +144,12 @@ class CourierServiceTest : AbstractBaseServiceTest() {
 
     }
 
+    /**
+     * Test for getPastTravelsByCourierId method.
+     *
+     * This test ensures that the getPastTravelsByCourierId method returns the travels
+     * for a given courier ID.
+     */
     @Test
     fun `getPastTravelsByCourierId should return travels for a given courier ID`() {
 
@@ -153,6 +182,12 @@ class CourierServiceTest : AbstractBaseServiceTest() {
 
     }
 
+    /**
+     * Test for getTravelsByCourierIdStoreNameAndTimeRange method.
+     *
+     * This test ensures that the getTravelsByCourierIdStoreNameAndTimeRange method returns the travels
+     * within the specified time range for a given courier ID and store name.
+     */
     @Test
     fun `getTravelsByCourierIdStoreNameAndTimeRange should return travels within time range`() {
 
@@ -185,6 +220,12 @@ class CourierServiceTest : AbstractBaseServiceTest() {
 
     }
 
+    /**
+     * Test for getTotalTravelDistance method.
+     *
+     * This test ensures that the getTotalTravelDistance method returns the total distance
+     * traveled by a courier.
+     */
     @Test
     fun `getTotalTravelDistance should return total distance traveled by a courier`() {
 

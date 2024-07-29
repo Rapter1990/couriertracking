@@ -14,6 +14,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * Integration tests for CourierController.
+ * This class tests the functionality of CourierController's endpoints.
+ */
 class CourierControllerTest : AbstractRestControllerTest() {
 
     @MockBean
@@ -21,7 +25,9 @@ class CourierControllerTest : AbstractRestControllerTest() {
 
     private final val courierToCourierResponseMapper: CourierToCourierResponseMapper = CourierToCourierResponseMapper.initialize()
 
-
+    /**
+     * Test that the logCourierLocation endpoint returns a success message.
+     */
     @Test
     fun `logCourierLocation should return success message`() {
         val logRequest = LogCourierLocationRequest(
@@ -38,6 +44,9 @@ class CourierControllerTest : AbstractRestControllerTest() {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.response").value("Location logged successfully."))
     }
 
+    /**
+     * Test that the getPastTravels endpoint returns a list of travels for a given courier ID.
+     */
     @Test
     fun `getPastTravels should return a list of travels`() {
         val courierId = "123e4567-e89b-12d3-a456-426614174000"
@@ -59,6 +68,9 @@ class CourierControllerTest : AbstractRestControllerTest() {
 
     }
 
+    /**
+     * Test that the getTravelsByCourierIdStoreNameAndTimeRange endpoint returns filtered travels.
+     */
     @Test
     fun `getTravelsByCourierIdStoreNameAndTimeRange should return filtered travels`() {
         val request = TravelQueryRequest(
@@ -92,6 +104,9 @@ class CourierControllerTest : AbstractRestControllerTest() {
 
     }
 
+    /**
+     * Test that the getTotalTravelDistance endpoint returns the total distance traveled by a courier.
+     */
     @Test
     fun `getTotalTravelDistance should return total distance traveled by a courier`() {
         val courierId = "123e4567-e89b-12d3-a456-426614174000"
