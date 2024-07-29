@@ -11,6 +11,15 @@ import org.hibernate.validator.constraints.UUID
 import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
+/**
+ * REST controller for managing couriers.
+ *
+ * This controller handles HTTP requests related to courier operations such as logging location,
+ * retrieving past travels, querying travels by store name and time range, and getting total travel distance.
+ *
+ * @property courierService the service used to handle courier operations.
+ * @constructor Creates a CourierController instance with the given `courierService`.
+ */
 @RestController
 @RequestMapping("/api/couriers")
 @Validated
@@ -20,6 +29,9 @@ class CourierController(private val courierService: CourierService) {
 
     /**
      * Log a courier's location.
+     *
+     * @param logRequest the request containing the courier's location details.
+     * @return a `CustomResponse` indicating the success of the operation.
      */
     @PostMapping("/log-location")
     fun logCourierLocation(
@@ -31,6 +43,9 @@ class CourierController(private val courierService: CourierService) {
 
     /**
      * Get past travels of a courier by courier ID.
+     *
+     * @param courierId the UUID of the courier.
+     * @return a `CustomResponse` containing a list of past travels.
      */
     @GetMapping("/travels/{courierId}")
     fun getPastTravels(
@@ -43,6 +58,9 @@ class CourierController(private val courierService: CourierService) {
 
     /**
      * Get travels of a courier by courier ID, store name, and time range.
+     *
+     * @param request the request containing the courier ID, store name, and time range.
+     * @return a `CustomResponse` containing a list of travels.
      */
     @GetMapping("/travels")
     fun getTravelsByCourierIdStoreNameAndTimeRange(
@@ -55,6 +73,9 @@ class CourierController(private val courierService: CourierService) {
 
     /**
      * Get total travel distance of a courier by courier ID.
+     *
+     * @param courierId the UUID of the courier.
+     * @return a `CustomResponse` containing the total travel distance in kilometers.
      */
     @GetMapping("/travels/{courierId}/total-distance")
     fun getTotalTravelDistance(

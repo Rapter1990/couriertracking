@@ -8,6 +8,16 @@ import lombok.Setter
 import java.time.LocalDateTime
 import java.util.*
 
+/**
+ * Entity representing a store location.
+ *
+ * @property id the unique identifier of the store record, automatically generated as a UUID.
+ * @property name the name of the store.
+ * @property lat the latitude of the store's location.
+ * @property lng the longitude of the store's location.
+ * @property createdAt the timestamp when the store record was created, automatically set to the current time if not specified.
+ * @constructor Creates a `StoreEntity` with the specified properties.
+ */
 @Entity
 @Table(name = "stores")
 @Getter

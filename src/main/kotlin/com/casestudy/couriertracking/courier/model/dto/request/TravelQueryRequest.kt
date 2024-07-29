@@ -4,6 +4,17 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import jakarta.validation.constraints.*
 import java.time.LocalDateTime
 
+/**
+ * Data class representing a request to query travels of a courier.
+ *
+ * @property courierId the UUID of the courier, which must be in a valid UUID format.
+ * @property storeName the name of the store, which cannot be blank.
+ * @property start the start time of the travel query, which must be in the past or present and formatted as "dd/MM/yyyy HH:mm".
+ * @property end the end time of the travel query, which must be in the future or present and formatted as "dd/MM/yyyy HH:mm".
+ * @constructor Creates a `TravelQueryRequest` with the specified properties.
+ *
+ * @throws IllegalArgumentException if the start time is after the end time.
+ */
 data class TravelQueryRequest(
         @field:NotBlank
         @field:Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$", message = "Invalid UUID format")

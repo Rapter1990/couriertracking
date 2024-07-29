@@ -7,10 +7,28 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
+/**
+ * Configuration class for loading initial data into the database.
+ *
+ * This class uses Spring Boot's `@Configuration` annotation to define
+ * a configuration for loading initial data. It uses the `@RequiredArgsConstructor`
+ * annotation for dependency injection.
+ *
+ * @property storeRepository the repository used to interact with the store data.
+ * @constructor Creates a DataLoader instance with the given `storeRepository`.
+ */
 @Configuration
 @RequiredArgsConstructor
 class DataLoader(private val storeRepository: StoreRepository) {
 
+    /**
+     * Loads initial data into the database.
+     *
+     * This method returns a `CommandLineRunner` bean that loads a predefined
+     * list of store entities into the database when the application starts.
+     *
+     * @return a `CommandLineRunner` that loads initial data into the database.
+     */
     @Bean
     fun loadInitialData(): CommandLineRunner {
         return CommandLineRunner {

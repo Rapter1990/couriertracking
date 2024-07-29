@@ -3,14 +3,34 @@ package com.casestudy.couriertracking.courier.strategy
 import com.casestudy.couriertracking.courier.model.Location
 import kotlin.math.*
 
+/**
+ * Strategy for calculating distance between two locations in meters.
+ *
+ * This strategy uses the Haversine formula to calculate the great-circle distance
+ * between two points on the Earth's surface and returns the result in meters.
+ */
 class DistanceInMetersCalculatorStrategy : DistanceCalculationStrategy {
     private val earthRadiusInMeters = 6371000.0
 
+    /**
+     * Calculates the distance between two locations in meters.
+     *
+     * @param startLoc the starting location.
+     * @param endLoc the ending location.
+     * @return the distance between the two locations in meters.
+     */
     override fun calculateDistance(startLoc: Location, endLoc: Location): Double {
         val centralAngle = calculateGreatCircleDistance(startLoc, endLoc)
         return earthRadiusInMeters * centralAngle
     }
 
+    /**
+     * Calculates the great-circle distance between two points using the Haversine formula.
+     *
+     * @param startLoc the starting location.
+     * @param endLoc the ending location.
+     * @return the central angle between the two locations.
+     */
     private fun calculateGreatCircleDistance(startLoc: Location, endLoc: Location): Double {
         val latOne = Math.toRadians(startLoc.latitude)
         val lngOne = Math.toRadians(startLoc.longitude)
