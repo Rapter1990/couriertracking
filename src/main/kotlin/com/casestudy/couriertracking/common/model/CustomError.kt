@@ -37,13 +37,8 @@ data class CustomError(
      * Enumerates common error headers for categorizing errors.
      */
     enum class Header(val headerName: String) {
-        API_ERROR("API ERROR"),
-        ALREADY_EXIST("ALREADY EXIST"),
         NOT_FOUND("NOT EXIST"),
         BAD_REQUEST("BAD REQUEST"),
-        VALIDATION_ERROR("VALIDATION ERROR"),
-        DATABASE_ERROR("DATABASE ERROR"),
         PROCESS_ERROR("PROCESS ERROR"),
-        AUTH_ERROR("AUTH ERROR");
     }
 }
