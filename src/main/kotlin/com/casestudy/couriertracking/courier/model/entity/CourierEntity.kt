@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor
 import lombok.RequiredArgsConstructor
 import lombok.Setter
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "couriers")
@@ -26,6 +26,9 @@ data class CourierEntity (
         val lat: Double,
 
         val lng: Double,
+
+        @Column(name = "store_name", nullable = false)
+        val storeName: String,
 
         val timestamp: LocalDateTime
 

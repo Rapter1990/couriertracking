@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 import java.util.*
 
 @Entity
-@Table(name = "store_entries")
+@Table(name = "stores")
 @Getter
 @Setter
 @RequiredArgsConstructor
