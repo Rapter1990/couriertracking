@@ -28,7 +28,31 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
     private lateinit var mockDistanceCalculationUtil: DistanceCalculationUtil
 
     /**
-     * Tests the `isWithinRadius` method in `DistanceUtils`.
+     * Test the `isWithinRadius` method in `DistanceUtils`.
+     *
+     * Given the coordinates of a courier and a store, this test verifies that the method returns `true`
+     * when the courier is within the specified radius in kilometers.
+     */
+    @Test
+    fun `test isWithinRadius returns true when within radius in kilometers`() {
+        val courierLat = 37.7749
+        val courierLng = -122.4194
+        val storeLat = 37.7750
+        val storeLng = -122.4183
+        val radiusInMeters = 100.0
+        val mockDistanceInKm = 0.0001 // Mocked distance in kilometers
+
+        // Mock the behavior of calculateDistance
+        whenever(mockDistanceCalculationUtil.calculateDistance(any(), any(), eq(DistanceType.KILOMETERS)))
+                .thenReturn(mockDistanceInKm)
+
+        val result = distanceUtils.isWithinRadius(courierLat, courierLng, storeLat, storeLng, radiusInMeters)
+
+        assertTrue(result, "Courier should be within the radius of the store.")
+    }
+
+    /**
+     * Test the `isWithinRadius` method in `DistanceUtils`.
      *
      * Given the coordinates of a courier and a store, this test verifies that the method returns `true`
      * when the courier is within the specified radius in meters.
@@ -52,7 +76,37 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
     }
 
     /**
-     * Tests the `isWithinRadius` method in `DistanceUtils`.
+     * Test the `isWithinRadius` method in `DistanceUtils`.
+     *
+     * Given the coordinates of a courier and a store, this test verifies that the method returns `false`
+     * when the courier is outside the specified radius in kilometers.
+     */
+    @Test
+    fun `test isWithinRadius returns false when outside radius in kilometers`() {
+        val courierLat = 37.7749
+        val courierLng = -122.4194
+        val storeLat = 37.7800
+        val storeLng = -122.4200
+        val radiusInMeters = 100.0
+        val mockDistanceInKm = 0.01 // Mocked distance in kilometers, which is more than the radius
+
+        // Convert radius from meters to kilometers for comparison
+        val radiusInKm = radiusInMeters / 1000.0
+
+        // Mock the behavior of calculateDistance
+        whenever(mockDistanceCalculationUtil.calculateDistance(any(), any(), eq(DistanceType.KILOMETERS)))
+                .thenReturn(mockDistanceInKm)
+
+        val result = distanceUtils.isWithinRadius(courierLat, courierLng, storeLat, storeLng, radiusInMeters)
+
+        // Print debug information to understand the result
+        println("Calculated distance (km): $mockDistanceInKm, Radius (km): $radiusInKm, Result: $result")
+
+        assertFalse(result, "Courier should not be within the radius of the store.")
+    }
+
+    /**
+     * Test the `isWithinRadius` method in `DistanceUtils`.
      *
      * Given the coordinates of a courier and a store, this test verifies that the method returns `false`
      * when the courier is outside the specified radius in meters.
@@ -89,6 +143,38 @@ class DistanceUtilsTest : AbstractBaseServiceTest() {
      */
     @Test
     fun `test calculateDistance returns correct distance in kilometers`() {
+        val lat1 = 37.7749
+        val lng1 = -122.4194
+        val lat2 = 37.7750
+        val lng2 = -122.4183
+
+        // Calculate the actual distance or use a realistic expected value
+        // Example distance between the two points (change this to the correct distance)
+        val expectedDistanceInKm = haversine(lat1, lng1, lat2, lng2)
+        val tolerance = 0.0001
+
+        // Mock the behavior of calculateDistance
+        whenever(mockDistanceCalculationUtil.calculateDistance(any(), any(), eq(DistanceType.KILOMETERS)))
+                .thenReturn(expectedDistanceInKm)
+
+        val distance = distanceUtils.calculateDistance(lat1, lng1, lat2, lng2, DistanceType.KILOMETERS)
+
+        // Print debug information to understand the result
+        println("Mocked distance (km): $expectedDistanceInKm, Actual distance (km): $distance")
+
+        // Ensure the distance is within the expected range
+        assertTrue(distance in expectedDistanceInKm - tolerance..expectedDistanceInKm + tolerance,
+                "Calculated distance ($distance) should be within the expected range ($expectedDistanceInKm ± $tolerance).")
+    }
+
+    /**
+     * Tests the `calculateDistance` method in `DistanceUtils`.
+     *
+     * Given the coordinates of two points, this test verifies that the method returns the correct distance
+     * in meters.
+     */
+    @Test
+    fun `test calculateDistance returns correct distance in meters`() {
         val lat1 = 37.7749
         val lng1 = -122.4194
         val lat2 = 37.7750

@@ -124,6 +124,31 @@ class GlobalExceptionHandlerTest : AbstractRestControllerTest() {
     }
 
     /**
+     * Tests the `handleGenericException` method in `GlobalExceptionHandler`.
+     *
+     * Given a generic `Exception`, this test verifies that the handler responds with an `InternalServerError` status.
+     */
+    @Test
+    fun `given Exception when handleGenericException then respond with InternalServerError`() {
+        // Given
+        val ex = Exception("Generic error message")
+
+        val expectedError = CustomError(
+                message = "Internal server error",
+                httpStatus = HttpStatus.INTERNAL_SERVER_ERROR,
+                header = CustomError.Header.PROCESS_ERROR.headerName
+        )
+
+        // When
+        val responseEntity = globalExceptionHandler.handleGenericException(ex)
+
+        // Then
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.statusCode)
+        val actualError = responseEntity.body as CustomError
+        checkCustomError(expectedError, actualError)
+    }
+
+    /**
      * Helper method to check if the actual `CustomError` matches the expected `CustomError`.
      *
      * @param expectedError The expected `CustomError`.

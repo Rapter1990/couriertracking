@@ -28,7 +28,7 @@ data class CustomResponse<T>(
         fun <T> errorOf(response: T): CustomResponse<T> {
             return CustomResponse(
                     httpStatus = HttpStatus.OK,
-                    isSuccess = true,
+                    isSuccess = false,
                     response = response
             )
         }
