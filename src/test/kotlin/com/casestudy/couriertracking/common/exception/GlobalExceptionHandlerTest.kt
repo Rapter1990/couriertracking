@@ -12,11 +12,22 @@ import org.springframework.http.HttpStatus
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
 
+/**
+ * Unit tests for the `GlobalExceptionHandler` class.
+ *
+ * This test class verifies that the `GlobalExceptionHandler` correctly handles various custom exceptions
+ * and responds with the appropriate HTTP status codes and error messages.
+ */
 class GlobalExceptionHandlerTest : AbstractRestControllerTest() {
 
     @InjectMocks
     private lateinit var globalExceptionHandler: GlobalExceptionHandler
 
+    /**
+     * Tests the `handleCourierNotFoundException` method in `GlobalExceptionHandler`.
+     *
+     * Given a `CourierNotFoundException`, this test verifies that the handler responds with a `NotFound` status.
+     */
     @Test
     fun `given CourierNotFoundException when handleCourierNotFoundException then respond with NotFound`() {
         // Given
@@ -37,6 +48,11 @@ class GlobalExceptionHandlerTest : AbstractRestControllerTest() {
         checkCustomError(expectedError, actualError)
     }
 
+    /**
+     * Tests the `handleStoreNotFoundException` method in `GlobalExceptionHandler`.
+     *
+     * Given a `StoreNotFoundException`, this test verifies that the handler responds with a `NotFound` status.
+     */
     @Test
     fun `given StoreNotFoundException when handleStoreNotFoundException then respond with NotFound`() {
         // Given
@@ -57,6 +73,11 @@ class GlobalExceptionHandlerTest : AbstractRestControllerTest() {
         checkCustomError(expectedError, actualError)
     }
 
+    /**
+     * Tests the `handleStoreFarAwayException` method in `GlobalExceptionHandler`.
+     *
+     * Given a `StoreFarAwayException`, this test verifies that the handler responds with a `BadRequest` status.
+     */
     @Test
     fun `given StoreFarAwayException when handleStoreFarAwayException then respond with BadRequest`() {
         // Given
@@ -77,6 +98,11 @@ class GlobalExceptionHandlerTest : AbstractRestControllerTest() {
         checkCustomError(expectedError, actualError)
     }
 
+    /**
+     * Tests the `handleTimestampBeforeStoreCreateException` method in `GlobalExceptionHandler`.
+     *
+     * Given a `TimestampBeforeStoreCreateException`, this test verifies that the handler responds with a `BadRequest` status.
+     */
     @Test
     fun `given TimestampBeforeStoreCreateException when handleTimestampBeforeStoreCreateException then respond with BadRequest`() {
         // Given
@@ -97,6 +123,12 @@ class GlobalExceptionHandlerTest : AbstractRestControllerTest() {
         checkCustomError(expectedError, actualError)
     }
 
+    /**
+     * Helper method to check if the actual `CustomError` matches the expected `CustomError`.
+     *
+     * @param expectedError The expected `CustomError`.
+     * @param actualError The actual `CustomError`.
+     */
     private fun checkCustomError(expectedError: CustomError, actualError: CustomError) {
         assertNotNull(actualError)
         assertNotNull(actualError.time)
