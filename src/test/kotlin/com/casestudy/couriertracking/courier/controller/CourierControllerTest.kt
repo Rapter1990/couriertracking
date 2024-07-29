@@ -111,12 +111,13 @@ class CourierControllerTest : AbstractRestControllerTest() {
     fun `getTotalTravelDistance should return total distance traveled by a courier`() {
         val courierId = "123e4567-e89b-12d3-a456-426614174000"
         val totalDistance = 0.097 // Example distance in kilometers
-
+        val formattedDistance = String.format("%.2f km", totalDistance)
         whenever(courierService.getTotalTravelDistance(courierId)).thenReturn(totalDistance)
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/couriers/travels/{courierId}/total-distance", courierId))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/couriers/travels/{courierId}/total-distance", courierId)
+                .contentType("application/json"))
                 .andExpect(MockMvcResultMatchers.status().isOk)
-                .andExpect(MockMvcResultMatchers.jsonPath("$.response").value("0,10 km"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.response").value(formattedDistance))
     }
 
 }
