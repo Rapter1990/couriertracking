@@ -155,7 +155,21 @@ https://hub.docker.com/repository/docker/noyandocker/couriertracking/general
 <details>
 <summary>Click here to show the screenshots of project</summary>
     <p> Figure 1 </p>
-    <img src ="screenshots/eureka_server_image.PNG">
+    <img src ="screenshots/screenshot1.PNG">
+    <p> Figure 2 </p>
+    <img src ="screenshots/screenshot2.PNG">
+    <p> Figure 3 </p>
+    <img src ="screenshots/screenshot3.PNG">
+    <p> Figure 4 </p>
+    <img src ="screenshots/screenshot4.PNG">
+    <p> Figure 5 </p>
+    <img src ="screenshots/screenshot5.PNG">
+    <p> Figure 6 </p>
+    <img src ="screenshots/screenshot6.PNG">
+    <p> Figure 7 </p>
+    <img src ="screenshots/screenshot7.PNG">
+    <p> Figure 8 </p>
+    <img src ="screenshots/screenshot8.PNG">
 </details>
 
 
