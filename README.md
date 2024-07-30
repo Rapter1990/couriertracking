@@ -1,7 +1,7 @@
 # Case Study - Courier Tracking (Spring Boot - Kotlin)
 
 <p align="center">
-    <img src="screenshots/main.png" alt="Main Information" width="700" height="500">
+    <img src="screenshots/spring_boot_microservices_courier_tracking_main.png" alt="Main Information" width="700" height="500">
 </p>
 
 ### 📖 Information
