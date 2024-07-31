@@ -111,6 +111,12 @@ DATABASE_USERNAME={DATABASE_USERNAME}
 DATABASE_PASSWORD={DATABASE_PASSWORD}
 ```
 
+### Open Api (Swagger)
+
+```
+http://localhost:1231/swagger-ui/index.html
+```
+
 ---
 - Gradle or Docker
 ---
@@ -170,6 +176,8 @@ https://hub.docker.com/repository/docker/noyandocker/couriertracking/general
     <img src ="screenshots/screenshot7.PNG">
     <p> Figure 8 </p>
     <img src ="screenshots/screenshot8.PNG">
+    <p> Figure 9 </p>
+    <img src ="screenshots/screenshot9.PNG">
 </details>
 
 
